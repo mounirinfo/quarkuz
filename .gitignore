@@ -6,7 +6,7 @@ bin/
 
 # IntelliJ
 .idea
-.idea1
+.idea
 *.ipr
 *.iml
 *.iws
