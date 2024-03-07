@@ -1,5 +1,5 @@
 # quarkuz
-Repository to explore basic functionnalities of quarkus
+Repository to explore basic functionalities of quarkus
 
 1- Generate react app --> not used
 2- Generate Backend based on quarkus
