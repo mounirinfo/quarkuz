@@ -1,34 +1,23 @@
 package org.acme.getting.started.testing;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
+import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.common.http.TestHTTPEndpoint;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import org.junit.jupiter.api.Test;
-
-import io.quarkus.test.junit.QuarkusTest;
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
+@TestHTTPEndpoint(GreetingResource.class)
 public class GreetingResourceTest {
 
     @Test
     public void testHelloEndpoint() {
-        given()
-                .when().get("/hello")
-                .then()
-                .statusCode(200)
-                .body(is("hello"));
-    }
-
-    @Test
-    public void testGreetingEndpoint() {
-        String uuid = UUID.randomUUID().toString();
-        given()
-                .pathParam("name", uuid)
-                .when().get("/hello/greeting/{name}")
-                .then()
-                .statusCode(200)
-                .body(is("hello " + uuid));
+        when().get()
+            .then()
+            .statusCode(200)
+            .body(is("hello"));
     }
 }

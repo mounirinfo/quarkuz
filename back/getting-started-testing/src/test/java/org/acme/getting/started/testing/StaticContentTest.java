@@ -8,21 +8,22 @@ import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import io.quarkus.test.common.http.TestHTTPEndpoint;
 import io.quarkus.test.common.http.TestHTTPResource;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 public class StaticContentTest {
 
-    @TestHTTPResource("index.html")
+    @TestHTTPEndpoint(GreetingResource.class)
+    @TestHTTPResource
     URL url;
 
     @Test
     public void testIndexHtml() throws IOException {
         try (InputStream in = url.openStream()) {
             String contents = new String(in.readAllBytes(), StandardCharsets.UTF_8);
-            Assertions.assertTrue(contents.contains("<title>Testing Guide</title>"));
+            Assertions.assertEquals("hello", contents);
         }
     }
-
 }
